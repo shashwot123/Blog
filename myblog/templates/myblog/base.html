@@ -1,5 +1,9 @@
+{% load static %}
 <html>
-  <head><title>{% block title %}My Site{% endblock %}</title></head>
+  <head>
+    <link rel="stylesheet" href="{% static 'myblog/styles.css' %}">
+    <title>{% block title %}My Site{% endblock %}</title>
+  </head>
   <body>
     <header>My Blog</header>
     <div>

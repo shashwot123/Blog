@@ -10,3 +10,8 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True)
     is_published = models.BooleanField(default=False)
+
+class Comments(models.Model):
+    text = models.CharField(max_length=100)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
