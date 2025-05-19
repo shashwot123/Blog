@@ -1,0 +1,29 @@
+{% extends "myblog/base.html" %}
+<html>
+    <head>
+        <title>
+            {% block title %}Blog{% endblock %}
+        </title>    
+    </head>
+    <body>
+        {% block content %}
+        <div>
+            <h1>
+                Latest Posts
+            </h1>
+            <p>
+                <ul>
+                    {% for post in posts %}
+                        <h2>{{ post.title }}</h2>
+                        <p> Created by: {{ post.author }} </p>
+                        <p> Created at: {{ post.created_at }}</p>
+                    {% endfor %}
+                </ul>
+            </p>
+        </div>
+        {% endblock %}
+    </body>
+</html>
+
+
+
