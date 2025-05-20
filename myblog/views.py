@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render,redirect
+from django.contrib.auth import login
 from .models import Post, Comments
-from .forms import CommentForm
+from .forms import CommentForm, CustomUserCreationForm
 
 def post_list(request):
     posts = Post.objects.filter(is_published=True).order_by("-published_at")
@@ -28,3 +28,14 @@ def post_detail(request, id):
         "post": post,
         "comments" : comments,
         "form": form})
+
+def signup_view(request):
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid:
+            user = form.save()
+            login(request, user)
+            return redirect("post_list")
+    else:
+        form = CustomUserCreationForm()
+    return render(request, "registration/signup.html",{"form": form})
